@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-    def index
-    end
+  def index
+    @article = Article.first
+  end
 
-    def about
-    end
+  def about; end
 end
