@@ -25,6 +25,7 @@ class Article < ApplicationRecord
     validate :title_and_content_length
 
     has_many :comments, dependent: :destroy
+    has_many :likes, dependent: :destroy
     belongs_to :user
 
 def display_created_at
