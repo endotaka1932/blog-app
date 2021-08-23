@@ -30,7 +30,7 @@ class User < ApplicationRecord
   delegate :birthday, :age, :gender, :introduction, to: :profile, allow_nil: true
 
   def has_written(article)
-    articles.exists?(id: article.id) 
+    articles.exists?(id: article.id)
   end
 
   def has_liked(article)
