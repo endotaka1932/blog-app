@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
@@ -30,7 +30,7 @@ class User < ApplicationRecord
   delegate :birthday, :age, :gender, :introduction, to: :profile, allow_nil: true
 
   def has_written(article)
-    articles.exists?(id: article.id) 
+    articles.exists?(id: article.id)
   end
 
   def has_liked(article)
