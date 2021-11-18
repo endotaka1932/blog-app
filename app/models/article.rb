@@ -3,7 +3,6 @@
 # Table name: articles
 #
 #  id         :bigint           not null, primary key
-#  content    :text             not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -15,15 +14,17 @@
 #
 class Article < ApplicationRecord
     has_one_attached :eyecatch
+    has_rich_text :content
+
     validates :title, presence: true
     validates :title, length: { minimum: 2, maximum: 100 }
     validates :title, format: { with: /\A(?!\@)/}
 
     validates :content, presence: true
-    validates :content, length: { maximum: 300 }
-    validates :content, uniqueness: true
+    # validates :content, length: { maximum: 300 }
+    # validates :content, uniqueness: true
 
-    validate :title_and_content_length
+    # validate :title_and_content_length
 
     has_many :comments, dependent: :destroy
     has_many :likes, dependent: :destroy
@@ -41,9 +42,9 @@ def like_count
     likes.count
 end
 
-    private
-    def title_and_content_length
-        char_count = self.title.length + self.content.length
-        errors.add(:content, '5文字以上で入力') unless char_count > 10
-    end
+    # private
+    # def title_and_content_length
+    #     char_count = self.title.length + self.content.length
+    #     errors.add(:content, '5文字以上で入力') unless char_count > 10
+    # end
 end
