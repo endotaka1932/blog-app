@@ -18,11 +18,11 @@
 
     &.active {
       background-color: $primary-color;
+  
+      a {
+        color: white;
+      }
     }
-      // a {
-      //   color: white;
-      // }
-
     &:hover {
       opacity: 0.9;
     }
