@@ -26,6 +26,7 @@ gem 'binding_of_caller'
 gem 'solargraph'
 gem 'devise'
 gem 'faker'
+gem 'active_decorator'
 gem 'hamlit'
 gem 'aws-sdk-s3' , require: false
 

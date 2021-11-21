@@ -60,27 +60,10 @@ class User < ApplicationRecord
     following_relationships.exists?(following_id: user.id)
   end
 
-  def display_name
-    # if profile && profile.nicname
-    #   profile.nicname
-    # else
-    #   self.email.split('@').first
-    # end
-    # ぼっち演算子
-    profile&.nicname || self.email.split('@').first
-  end
-
   def prepare_profile
     profile || build_profile
   end
 
-  def avatar_image
-    if profile&.avatar&.attached?
-      profile.avatar
-    else
-      'default-avatar.png'
-    end
-  end
 
   private
     def get_user_id(user)
