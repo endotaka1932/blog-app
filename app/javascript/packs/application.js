@@ -19,6 +19,14 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 
-document.addEventListener('DOMContentLoaded' , () => {
-    window.alert('DOM LOADED')
+import $ from 'jquery'
+import axios from 'axios'
+
+document.addEventListener('turbolinks:load' , () => {
+    $('.article_title').on('click', () => {
+        axios.get('/')
+        .then((response) => {
+          console.log(response)
+        })
+    })
 })
