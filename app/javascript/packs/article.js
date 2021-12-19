@@ -1,8 +1,10 @@
 import $ from 'jquery'
-import axios from 'axios'
-import { csrfToken } from '@rails/ujs'
+import axios from 'modules/axios'
+import { 
+    listenInactiveHeartEvent,
+    listenActiveHeartEvent
+ } from 'modules/handle_heart'
 
-axios.defaults.headers.common['X-CSRF-Token'] = csrfToken()
 
 const HandleHeartDisplay = (hasLiked) => {
     if (hasLiked) {
@@ -56,40 +58,12 @@ document.addEventListener('DOMContentLoaded' , () => {
         }
       })
     
-
-
     axios.get(`/articles/${articleId}/like`)
         .then((response) => {
             const hasLiked = response.data.hasLiked
             HandleHeartDisplay(hasLiked)
         }) 
 
-    $('.inactive-heart').on('click', () => {
-        axios.post(`/articles/${articleId}/like`)
-            .then((response) => {
-                if (response.data.status === 'ok' ) {
-                    $('.inactive-heart').addClass('hidden')
-                    $('.active-heart').removeClass('hidden')
-                }
-            })
-            .catch((e) => {
-                window.alert('error')
-                console.log(e)
-            })
-    })
-
-    $('.active-heart').on('click', () => {
-        axios.delete(`/articles/${articleId}/like`)
-            .then((response) => {
-                if (response.data.status === 'ok' ) {
-                    $('.inactive-heart').removeClass('hidden')
-                    $('.active-heart').addClass('hidden')
-                }
-
-            })
-            .catch((e) => {
-                window.alert('error')
-                console.log(e)
-            })
-    })
+    listenInactiveHeartEvent(articleId)
+    listenActiveHeartEvent(articleId)
 })
